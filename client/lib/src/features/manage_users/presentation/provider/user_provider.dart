@@ -5,7 +5,7 @@ import '../../application/get_all_users.dart';
 import '../../application/delete_users.dart';
 import 'package:dio/dio.dart';
 
-final dioProvider = Provider((ref) => Dio(BaseOptions(baseUrl: 'http://your-api-url.com')));
+final dioProvider = Provider((ref) => Dio(BaseOptions(baseUrl: 'http://192.168.8.103:5500/api/')));
 
 final userRepositoryProvider = Provider((ref) {
   final dio = ref.read(dioProvider);
