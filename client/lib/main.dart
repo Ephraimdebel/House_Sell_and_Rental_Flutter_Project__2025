@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:house_rental_flutter/src/features/profile/presentation/pages/profile_page.dart';
 import 'src/features/manage_home/presentation/pages/manage_home_page.dart';
 
 void main() {
@@ -17,7 +18,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const ManageHomePage(),
+      home: const ProfileScreen(),
     );
   }
 }
