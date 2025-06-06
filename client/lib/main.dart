@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:house_rental_flutter/src/features/profile/presentation/pages/profile_page.dart';
 import 'src/features/manage_home/presentation/pages/manage_home_page.dart';
-
+import 'src/features/add_property/presentation/pages/add_property_page.dart';
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
@@ -12,9 +12,18 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // return MaterialApp(
+    //   debugShowCheckedModeBanner: false,
+    //   title: 'Manage Properties',
+    //   theme: ThemeData(
+    //     primarySwatch: Colors.blue,
+    //   ),
+    //   home: const ManageHomePage(),
+    // );
+
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-      title: 'Manage Properties',
+      title: 'add Properties',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),

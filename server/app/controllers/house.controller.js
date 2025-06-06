@@ -5,6 +5,7 @@ const { BASE_URL } = require("../../config/index");
 
 const dbConnection = require("../../config/db");
 
+
  const addHouse = async (req, res) => {
   console.log("add house step 1",req.body)
   try {
@@ -92,17 +93,6 @@ const typeId = typeMap[type] || null;
     //   return res.status(400).json({ message: 'User not authenticated' });
     // }
     console.log("step 5")
-
-    // const notificationQuery = `
-    //   INSERT INTO notifications (user_id, message)
-    //   VALUES (?, ?)
-    // `;
-    // const notificationValues = [
-    //   req.user.userid,
-    //   `Listing "${title}" created successfully`,
-    // ];
-
-    // await dbConnection.query(notificationQuery, notificationValues);
 
     res.status(200).json({
       message: 'Property created successfully',
