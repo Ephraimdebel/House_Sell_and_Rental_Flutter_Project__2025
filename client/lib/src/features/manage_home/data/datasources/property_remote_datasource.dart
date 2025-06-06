@@ -11,5 +11,8 @@ class PropertyRemoteDataSource {
     final List data = response.data['data'];
     return data.map((json) => PropertyModel.fromJson(json)).toList();
   }
+  Future<void> deleteProperty(String id) async {
+    await dio.delete('http://10.0.2.2:5500/api/house/$id');
+  }
   
 }
