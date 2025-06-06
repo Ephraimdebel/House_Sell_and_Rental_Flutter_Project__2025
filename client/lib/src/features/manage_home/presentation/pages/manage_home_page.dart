@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../providers/property_provider.dart';
+import '../controllers/property_provider.dart';
 import '../widgets/property_card.dart';
 
 class ManageHomePage extends ConsumerStatefulWidget {
@@ -91,9 +91,27 @@ class _ManageHomePageState extends ConsumerState<ManageHomePage> {
                               onEdit: () {
                                 // TODO: Navigate to edit screen
                               },
-                              onDelete: () {
-                                // TODO: Handle delete
+                              onDelete: () async {
+                                final confirmed = await showDialog<bool>(
+                                  context: context,
+                                  builder: (_) => AlertDialog(
+                                    title: Text('Confirm Delete'),
+                                    content: Text('Are you sure you want to delete this property?'),
+                                    actions: [
+                                      TextButton(onPressed: () => Navigator.pop(context, false), child: Text('Cancel')),
+                                      ElevatedButton(onPressed: () => Navigator.pop(context, true), child: Text('Delete')),
+                                    ],
+                                  ),
+                                );
+
+                                if (confirmed == true) {
+                                  final service = ref.read(propertyControllerProvider);
+                                  await service.deleteProperty(property.id.toString());
+                                  ref.invalidate(propertyProvider); // Refresh list
+
+                                }
                               },
+
                             );
                           },
                         ),

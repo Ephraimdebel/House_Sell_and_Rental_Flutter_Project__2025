@@ -9,6 +9,8 @@ class PropertyService {
   Future<List<Property>> getAllProperties() {
     return repository.getAllProperties();
   }
-
+  Future<void> deleteProperty(String id) {
+      return repository.deleteProperty(id);
+    }
   
 }
