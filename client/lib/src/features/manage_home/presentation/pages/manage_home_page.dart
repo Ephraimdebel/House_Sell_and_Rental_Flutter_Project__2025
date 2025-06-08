@@ -89,7 +89,10 @@ class _ManageHomePageState extends ConsumerState<ManageHomePage> {
                             return PropertyCard(
                               property: property,
                               onEdit: () {
-                                // TODO: Navigate to edit screen
+                                // context.push('/edit-property', extra: {
+                                //       'id': listing.id,
+                                //       'property': listing, // converted to NewProperty
+                                //     });
                               },
                               onDelete: () async {
                                 final confirmed = await showDialog<bool>(

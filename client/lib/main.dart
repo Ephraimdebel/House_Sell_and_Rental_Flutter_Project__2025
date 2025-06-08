@@ -4,6 +4,8 @@ import 'package:house_rental_flutter/src/features/manage_users/presentation/page
 import 'package:house_rental_flutter/src/features/profile/presentation/pages/profile_page.dart';
 import 'src/features/manage_home/presentation/pages/manage_home_page.dart';
 import 'src/features/add_property/presentation/pages/add_property_page.dart';
+import 'src/features/edit_property/presentation/pages/edit_property_page.dart';
+
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
@@ -28,7 +30,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: ManageUsersPage(),
+      home: ManageHomePage(),
     );
   }
 }
