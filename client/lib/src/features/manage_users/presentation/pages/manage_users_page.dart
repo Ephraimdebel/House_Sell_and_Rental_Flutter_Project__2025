@@ -17,7 +17,7 @@ class _ManageUsersPageState extends ConsumerState<ManageUsersPage> {
     final usersAsync = ref.watch(userListProvider);
 
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Color(0xFFF7F7F7),
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: true,

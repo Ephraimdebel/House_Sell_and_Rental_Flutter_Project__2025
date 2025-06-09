@@ -1,14 +1,15 @@
-// datasources.dart
 import 'package:dio/dio.dart';
-import '../models/house_model.dart';
+import 'package:house_rental_flutter/src/features/admin_dashboard/data/models/house_model.dart';
 
-class HouseRemoteDatasource {
+
+class HouseRemoteDataSource {
   final Dio dio;
-  HouseRemoteDatasource(this.dio);
 
-  Future<List<HouseModel>> fetchListings(int type) async {
-    final response = await dio.get('/listings', queryParameters: {'type': type});
+  HouseRemoteDataSource(this.dio);
+
+  Future<List<HouseModel>> fetchHousesByType(int typeId) async {
+    final response = await dio.get('/listings?type=$typeId');
     final data = response.data['houses'] as List;
-    return data.map((e) => HouseModel.fromJson(e)).toList();
+    return data.map((json) => HouseModel.fromJson(json)).toList();
   }
 }
