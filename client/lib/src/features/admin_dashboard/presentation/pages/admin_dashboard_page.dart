@@ -4,6 +4,7 @@ import 'package:house_rental_flutter/src/features/add_property/presentation/page
 import 'package:house_rental_flutter/src/features/admin_dashboard/presentation/pages/widgets/manage_button.dart';
 import 'package:house_rental_flutter/src/features/admin_dashboard/presentation/pages/widgets/overview_card.dart';
 import 'package:house_rental_flutter/src/features/admin_dashboard/presentation/pages/widgets/property_value_card.dart';
+import 'package:house_rental_flutter/src/features/manage_home/presentation/pages/manage_home_page.dart';
 import 'package:house_rental_flutter/src/features/manage_users/presentation/pages/manage_users_page.dart';
 import '../provider/house_provider.dart';
 
@@ -16,7 +17,7 @@ class AdminDashboardPage extends ConsumerWidget {
 
     return Scaffold(
       backgroundColor: Color(0xFFF7F7F7),
-      appBar: AppBar(title: Text("Admin Dashboard"),
+      appBar: AppBar(title: Text("Admin Dashboard", style: TextStyle(color: Color(0xFF5D9DF0))),
         backgroundColor: Colors.white,
       ),  
       body: statsAsync.when(
@@ -63,7 +64,7 @@ class AdminDashboardPage extends ConsumerWidget {
                 children: [
                   Expanded(child: PropertyValueCard(title: "Total Sale Value", value: "ETB ${stats['saleValue']}", bgColor: Colors.red.shade100)),
                   SizedBox(width: 8),
-                  Expanded(child: PropertyValueCard(title: "Monthly Rental Income", value: "ETB ${stats['rentValue']}/mo", bgColor: Colors.blue.shade100)),
+                  Expanded(child: PropertyValueCard(title: "Monthly Rental Income", value: "ETB ${stats['rentValue']}/mo", bgColor: Color(0xFFD1E4FE))),
                 ],
               ),
               SizedBox(height: 16),
@@ -73,21 +74,33 @@ class AdminDashboardPage extends ConsumerWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: [
-                    Expanded(child: ManageButton(icon: Icons.home, label: "Manage Properties", onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => AddPropertyPage()));})),
+                    Expanded(child: ManageButton(icon: Icons.home, label: "Manage Properties", onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ManageHomePage()));})),
                     SizedBox(width: 16),
                     Expanded(child: ManageButton(icon: Icons.group, label: "Manage Users", onTap: () {Navigator.push(context, MaterialPageRoute(builder: (context) => ManageUsersPage()));})),
                   ],
                 ),
               SizedBox(height: 16),
-              SizedBox(
-                width: double.infinity,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.blue,
-                    elevation: 0,
-                    padding: EdgeInsets.symmetric(vertical: 16),
+                SizedBox(
+                  width: double.infinity,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF5D9DF0),
+                      elevation: 0,
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                    ),
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => AddPropertyPage()),
+                      );
+                    },
+                    child: Text(
+                      "Add New Property",
+                      style: TextStyle(color: Colors.white),
+                    ),
                   ),
-                  onPressed: (){}, child: Text("Add New Property",style: TextStyle(color: Colors.white),)))
+                ),
+
             ],
           ),
         ),
