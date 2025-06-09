@@ -12,5 +12,7 @@ class PropertyService {
   Future<void> deleteProperty(String id) {
       return repository.deleteProperty(id);
     }
-  
+  Future<Property> getPropertyById(String id) {
+    return repository.getPropertyById(id);
+  }
 }

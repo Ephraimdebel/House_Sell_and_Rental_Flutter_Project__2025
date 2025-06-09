@@ -1,5 +1,7 @@
-import 'package:dio/dio.dart';
+
+import '../entities/editable_property.dart';
 
 abstract class EditPropertyRepository {
-  Future<void> updateProperty(String id, FormData formData);
+  Future<EditableProperty> fetchProperty(int id);
+  Future<void> updateProperty(int id, EditableProperty property);
 }

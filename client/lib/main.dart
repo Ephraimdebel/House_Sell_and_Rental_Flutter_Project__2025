@@ -1,36 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:house_rental_flutter/src/features/manage_users/presentation/pages/manage_users_page.dart';
-import 'package:house_rental_flutter/src/features/profile/presentation/pages/profile_page.dart';
-import 'src/features/manage_home/presentation/pages/manage_home_page.dart';
-import 'src/features/add_property/presentation/pages/add_property_page.dart';
-import 'src/features/edit_property/presentation/pages/edit_property_page.dart';
+import 'src/core/routes/router.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // return MaterialApp(
-    //   debugShowCheckedModeBanner: false,
-    //   title: 'Manage Properties',
-    //   theme: ThemeData(
-    //     primarySwatch: Colors.blue,
-    //   ),
-    //   home: const ManageHomePage(),
-    // );
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
 
-    return MaterialApp(
+    return MaterialApp.router(
+      routerConfig: router,
       debugShowCheckedModeBanner: false,
-      title: 'add Properties',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
-      home: ManageHomePage(),
+      title: 'Real Estate App',
     );
   }
 }

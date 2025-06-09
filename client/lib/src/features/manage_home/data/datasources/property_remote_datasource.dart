@@ -14,5 +14,17 @@ class PropertyRemoteDataSource {
   Future<void> deleteProperty(String id) async {
     await dio.delete('http://10.0.2.2:5500/api/house/$id');
   }
-  
+  Future<PropertyModel> fetchPropertyById(String id) async {
+  final response = await dio.get('http://10.0.2.2:5500/api/house/$id');
+  final List<dynamic> data = response.data['data'];
+
+  // ✅ Safely extract the first item in the list
+  if (data.isNotEmpty) {
+    return PropertyModel.fromJson(data[0]);
+  } else {
+    throw Exception("No property data found");
+  }
+}
+
+
 }
