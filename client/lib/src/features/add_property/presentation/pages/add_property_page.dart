@@ -36,23 +36,34 @@ class _AddPropertyPageState extends ConsumerState<AddPropertyPage> {
   List<String> imagePaths = [];
 
   final facilities = [
-    'WiFi', 'Parking', 'Swimming Pool', 'Gym', 'Air Conditioning', 'Heating',
-    'Laundry', 'Security', 'Elevator', 'Balcony', 'Garden', 'Furnished',
-    'Pet Friendly', 'Fireplace', 'Dishwasher'
+    'WiFi',
+    'Parking',
+    'Swimming Pool',
+    'Gym',
+    'Air Conditioning',
+    'Heating',
+    'Laundry',
+    'Security',
+    'Elevator',
+    'Balcony',
+    'Garden',
+    'Furnished',
+    'Pet Friendly',
+    'Fireplace',
+    'Dishwasher',
   ];
 
-final ImagePicker _picker = ImagePicker();
+  final ImagePicker _picker = ImagePicker();
 
-void pickImages() async {
-  final List<XFile>? pickedFiles = await _picker.pickMultiImage();
+  void pickImages() async {
+    final List<XFile> pickedFiles = await _picker.pickMultiImage();
 
-  if (pickedFiles != null && pickedFiles.isNotEmpty) {
-    setState(() {
-      imagePaths.addAll(pickedFiles.map((file) => file.path));
-    });
+    if (pickedFiles.isNotEmpty) {
+      setState(() {
+        imagePaths.addAll(pickedFiles.map((file) => file.path));
+      });
+    }
   }
-}
-
 
   void submit() async {
     if (!_formKey.currentState!.validate()) return;
@@ -99,7 +110,8 @@ void pickImages() async {
               TextFormField(
                 controller: _titleController,
                 decoration: const InputDecoration(labelText: 'Title'),
-                validator: (val) => val == null || val.isEmpty ? 'Required' : null,
+                validator:
+                    (val) => val == null || val.isEmpty ? 'Required' : null,
               ),
               TextFormField(
                 controller: _descriptionController,
@@ -109,20 +121,30 @@ void pickImages() async {
               const SizedBox(height: 16),
               Wrap(
                 spacing: 8,
-                children: ['House', 'Apartment', 'Condo', 'Townhouse', 'Villa'].map((e) => ChoiceChip(
-                  label: Text(e),
-                  selected: category == e,
-                  onSelected: (_) => setState(() => category = e),
-                )).toList(),
+                children:
+                    ['House', 'Apartment', 'Condo', 'Townhouse', 'Villa']
+                        .map(
+                          (e) => ChoiceChip(
+                            label: Text(e),
+                            selected: category == e,
+                            onSelected: (_) => setState(() => category = e),
+                          ),
+                        )
+                        .toList(),
               ),
               const SizedBox(height: 8),
               Wrap(
                 spacing: 8,
-                children: ['For Sale', 'For Rent'].map((e) => ChoiceChip(
-                  label: Text(e),
-                  selected: type == e,
-                  onSelected: (_) => setState(() => type = e),
-                )).toList(),
+                children:
+                    ['For Sale', 'For Rent']
+                        .map(
+                          (e) => ChoiceChip(
+                            label: Text(e),
+                            selected: type == e,
+                            onSelected: (_) => setState(() => type = e),
+                          ),
+                        )
+                        .toList(),
               ),
               const SizedBox(height: 16),
               TextFormField(
@@ -155,31 +177,58 @@ void pickImages() async {
                 keyboardType: TextInputType.number,
               ),
               const SizedBox(height: 16),
-              const Text('Location', style: TextStyle(fontWeight: FontWeight.bold)),
-              TextFormField(controller: _streetController, decoration: const InputDecoration(labelText: 'Street')),
+              const Text(
+                'Location',
+                style: TextStyle(fontWeight: FontWeight.bold),
+              ),
+              TextFormField(
+                controller: _streetController,
+                decoration: const InputDecoration(labelText: 'Street'),
+              ),
               Row(
                 children: [
-                  Expanded(child: TextFormField(controller: _cityController, decoration: const InputDecoration(labelText: 'City'))),
+                  Expanded(
+                    child: TextFormField(
+                      controller: _cityController,
+                      decoration: const InputDecoration(labelText: 'City'),
+                    ),
+                  ),
                   const SizedBox(width: 8),
-                  Expanded(child: TextFormField(controller: _provinceController, decoration: const InputDecoration(labelText: 'State'))),
+                  Expanded(
+                    child: TextFormField(
+                      controller: _provinceController,
+                      decoration: const InputDecoration(labelText: 'State'),
+                    ),
+                  ),
                 ],
               ),
-              TextFormField(controller: _countryController, decoration: const InputDecoration(labelText: 'Country')),
+              TextFormField(
+                controller: _countryController,
+                decoration: const InputDecoration(labelText: 'Country'),
+              ),
               const SizedBox(height: 16),
               const Text('Amenities'),
               Wrap(
                 spacing: 8,
-                children: facilities.asMap().entries.map((entry) => FilterChip(
-                  label: Text(entry.value),
-                  selected: selectedFacilities.contains(entry.key),
-                  onSelected: (val) => setState(() {
-                    if (val) {
-                      selectedFacilities.add(entry.key);
-                    } else {
-                      selectedFacilities.remove(entry.key);
-                    }
-                  }),
-                )).toList(),
+                children:
+                    facilities
+                        .asMap()
+                        .entries
+                        .map(
+                          (entry) => FilterChip(
+                            label: Text(entry.value),
+                            selected: selectedFacilities.contains(entry.key),
+                            onSelected:
+                                (val) => setState(() {
+                                  if (val) {
+                                    selectedFacilities.add(entry.key);
+                                  } else {
+                                    selectedFacilities.remove(entry.key);
+                                  }
+                                }),
+                          ),
+                        )
+                        .toList(),
               ),
               const SizedBox(height: 16),
               const Text('Images'),
@@ -190,18 +239,23 @@ void pickImages() async {
               ),
               Wrap(
                 spacing: 8,
-                children: imagePaths.map((path) => Image.file(
-                  File(path),
-                  height: 100,
-                  width: 100,
-                  fit: BoxFit.cover,
-                )).toList(),
+                children:
+                    imagePaths
+                        .map(
+                          (path) => Image.file(
+                            File(path),
+                            height: 100,
+                            width: 100,
+                            fit: BoxFit.cover,
+                          ),
+                        )
+                        .toList(),
               ),
               const SizedBox(height: 24),
               ElevatedButton(
                 onPressed: submit,
                 child: const Text('Submit Property'),
-              )
+              ),
             ],
           ),
         ),
