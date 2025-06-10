@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'src/features/home/presentation/pages/home_page.dart';
+// import 'src/features/home/presentation/pages/home_page.dart';
 import 'src/features/login/presentation/pages/login_page.dart';
 import 'src/features/signup/presentation/pages/signup_page.dart';
 
@@ -13,20 +13,20 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'House Listing App',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: const HomePage(),
-    );
+    // return MaterialApp(
+    //   title: 'House Listing App',
+    //   theme: ThemeData(primarySwatch: Colors.blue),
+    //   home: const HomePage(),
+    // );
     // return MaterialApp(
     //   title: 'House Listing App',
     //   theme: ThemeData(primarySwatch: Colors.blue),
     //   home: LoginPage(),
     // );
-    // return MaterialApp(
-    //   title: 'House Listing App',
-    //   theme: ThemeData(primarySwatch: Colors.blue),
-    //   home: SignUpPage(),
-    // );
+    return MaterialApp(
+      title: 'House Listing App',
+      theme: ThemeData(primarySwatch: Colors.blue),
+      home: SignUpPage(),
+    );
   }
 }
