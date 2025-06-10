@@ -1,7 +1,6 @@
 // lib/features/signup/presentation/widgets/signup_form.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-<<<<<<< HEAD
 import '../../presentation/providers/signup_providers.dart';
 
 class SignUpForm extends ConsumerStatefulWidget {
@@ -9,15 +8,6 @@ class SignUpForm extends ConsumerStatefulWidget {
 
   @override
   ConsumerState<SignUpForm> createState() => _SignUpFormState();
-=======
-import 'package:house_rental_flutter/src/features/admin_dashboard/presentation/pages/admin_dashboard_page.dart';
-import 'package:house_rental_flutter/src/features/manage_users/presentation/pages/manage_users_page.dart';
-import 'package:house_rental_flutter/src/features/profile/presentation/pages/profile_page.dart';
-import 'src/features/manage_home/presentation/pages/manage_home_page.dart';
-import 'src/features/add_property/presentation/pages/add_property_page.dart';
-void main() {
-  runApp(const ProviderScope(child: MyApp()));
->>>>>>> 41180fa37550cc1eb672f395a69487074f62355c
 }
 
 class _SignUpFormState extends ConsumerState<SignUpForm> {
@@ -41,7 +31,6 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     final signUpState = ref.watch(signUpStateProvider);
-    const lightBlue = Color(0xFF64B5F6); // Define light blue color
 
     return Form(
       key: _formKey,
@@ -123,11 +112,6 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
           ),
           const SizedBox(height: 24),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: lightBlue, // Light blue background
-              foregroundColor: Colors.white, // White text
-              minimumSize: const Size(double.infinity, 50), // Full width button
-            ),
             onPressed:
                 signUpState.isLoading
                     ? null
@@ -149,9 +133,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
                     },
             child:
                 signUpState.isLoading
-                    ? const CircularProgressIndicator(
-                      color: Colors.white, // White loading indicator
-                    )
+                    ? const CircularProgressIndicator()
                     : const Text('Sign Up'),
           ),
           if (signUpState.hasError)
@@ -172,10 +154,6 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
             ),
         ],
       ),
-<<<<<<< HEAD
-=======
-      home: AdminDashboardPage(),
->>>>>>> 41180fa37550cc1eb672f395a69487074f62355c
     );
   }
 }
