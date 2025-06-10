@@ -14,7 +14,7 @@ class HomeRemoteDataSourceImpl implements HomeRemoteDataSource {
   @override
   Future<List<HouseModel>> getFeaturedHouses() async {
     try {
-      final response = await dio.get('/housetype?type_id=1');
+      final response = await dio.get('/housetype?type_id=2');
 
       if (response.statusCode == 200) {
         final data = response.data['data'] as List;

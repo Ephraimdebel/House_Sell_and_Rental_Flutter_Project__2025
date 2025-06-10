@@ -15,5 +15,9 @@ class PropertyRepositoryImpl implements PropertyRepository {
   Future<void> deleteProperty(String id) {
     return remoteDataSource.deleteProperty(id);
   }
-  
+  @override
+  Future<Property> getPropertyById(String id) {
+    return remoteDataSource.fetchPropertyById(id);
+}
+
 }

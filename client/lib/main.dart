@@ -1,32 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-// import 'src/features/home/presentation/pages/home_page.dart';
-import 'src/features/login/presentation/pages/login_page.dart';
-import 'src/features/signup/presentation/pages/signup_page.dart';
+import 'src/core/routes/router.dart';
 
 void main() {
   runApp(const ProviderScope(child: MyApp()));
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends ConsumerWidget {
   const MyApp({super.key});
 
   @override
-  Widget build(BuildContext context) {
-    // return MaterialApp(
-    //   title: 'House Listing App',
-    //   theme: ThemeData(primarySwatch: Colors.blue),
-    //   home: const HomePage(),
-    // );
-    // return MaterialApp(
-    //   title: 'House Listing App',
-    //   theme: ThemeData(primarySwatch: Colors.blue),
-    //   home: LoginPage(),
-    // );
-    return MaterialApp(
-      title: 'House Listing App',
-      theme: ThemeData(primarySwatch: Colors.blue),
-      home: SignUpPage(),
+  Widget build(BuildContext context, WidgetRef ref) {
+    final router = ref.watch(routerProvider);
+
+    return MaterialApp.router(
+      routerConfig: router,
+      debugShowCheckedModeBanner: false,
+      title: 'Real Estate App',
     );
   }
 }

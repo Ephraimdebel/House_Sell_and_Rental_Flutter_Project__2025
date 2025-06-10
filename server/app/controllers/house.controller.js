@@ -44,7 +44,8 @@ const typeId = typeMap[type] || null;
     const listingPhotos = photos;
 
     console.log("body ", req.body)
-    
+    const formattedFacilities = facilities.join(',');
+    console.log(formattedFacilities)
     // Check if files are uploaded
     if (!listingPhotos || listingPhotos.length === 0) {
       console.log("no image", )
@@ -58,7 +59,7 @@ const typeId = typeMap[type] || null;
     });
 
     const isAdmin = 1;
-    console.log("photo ", listingPhotos)
+    // console.log("photo ", listingPhotos)
 
     const query = `
       INSERT INTO Listings(creator_id, category_id, type_id, streetAddress, city, province, country, guestCount, bedroomCount, bathroomCount, listingPhotoPaths, title, description, price,area,facilities)
@@ -66,7 +67,7 @@ const typeId = typeMap[type] || null;
     `;
 
     const values = [
-      1, // Creator ID (hardcoded for testing)
+      18, // Creator ID (hardcoded for testing)
       categoryId,
       typeId,
       streetAddress,
@@ -81,7 +82,7 @@ const typeId = typeMap[type] || null;
       description,
       price,
       area,
-      JSON.stringify(facilities)
+      JSON.stringify(formattedFacilities)
     ];
     console.log("step 2",)
 

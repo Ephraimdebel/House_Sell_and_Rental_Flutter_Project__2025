@@ -51,12 +51,12 @@ class HouseCard extends StatelessWidget {
       child: Column(
         children: [
           if (house.images.isNotEmpty)
-            Image.network(
-              house.images.first,
-              height: 150,
-              width: double.infinity,
-              fit: BoxFit.cover,
-            ),
+        Image.network(
+          house.images.first.replaceFirst('localhost', '10.0.2.2'),
+          height: 150,
+          width: double.infinity,
+          fit: BoxFit.cover,
+        ),
           ListTile(
             title: Text(house.title),
             subtitle: Text('${house.city} - \$${house.price}'),

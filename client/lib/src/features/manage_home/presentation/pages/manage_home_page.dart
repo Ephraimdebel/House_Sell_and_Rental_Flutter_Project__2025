@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../controllers/property_provider.dart';
 import '../widgets/property_card.dart';
+import 'package:go_router/go_router.dart';
+import 'package:house_rental_flutter/src/features/add_property/domain/entities/new_property.dart';
 
 class ManageHomePage extends ConsumerStatefulWidget {
   const ManageHomePage({super.key});
@@ -58,24 +60,23 @@ class _ManageHomePageState extends ConsumerState<ManageHomePage> {
 
                 // 🟦 Filter Buttons
                 Row(
-                children: ['All', 'For sale', 'For rent'].map((label) {
+                  children: ['All', 'For sale', 'For rent'].map((label) {
                     final isSelected = filter == label;
                     return Padding(
-                    padding: const EdgeInsets.only(right: 8),
-                    child: ChoiceChip(
+                      padding: const EdgeInsets.only(right: 8),
+                      child: ChoiceChip(
                         label: Text(label),
                         selected: isSelected,
                         onSelected: (_) => setState(() => filter = label),
                         selectedColor: Colors.blue,
-                        backgroundColor: const Color(0xFFF7F7F7), // background for unselected
+                        backgroundColor: const Color(0xFFF7F7F7),
                         labelStyle: TextStyle(
-                        color: isSelected ? Colors.white : Colors.black,
+                          color: isSelected ? Colors.white : Colors.black,
                         ),
-                    ),
+                      ),
                     );
-                }).toList(),
+                  }).toList(),
                 ),
-
                 const SizedBox(height: 16),
 
                 // 🏘️ Property List
@@ -86,10 +87,11 @@ class _ManageHomePageState extends ConsumerState<ManageHomePage> {
                           itemCount: filtered.length,
                           itemBuilder: (context, index) {
                             final property = filtered[index];
+
                             return PropertyCard(
                               property: property,
                               onEdit: () {
-                                // TODO: Navigate to edit screen
+                                context.push('/edit-property/${property.id.toString()}');
                               },
                               onDelete: () async {
                                 final confirmed = await showDialog<bool>(
@@ -98,8 +100,14 @@ class _ManageHomePageState extends ConsumerState<ManageHomePage> {
                                     title: Text('Confirm Delete'),
                                     content: Text('Are you sure you want to delete this property?'),
                                     actions: [
-                                      TextButton(onPressed: () => Navigator.pop(context, false), child: Text('Cancel')),
-                                      ElevatedButton(onPressed: () => Navigator.pop(context, true), child: Text('Delete')),
+                                      TextButton(
+                                        onPressed: () => Navigator.pop(context, false),
+                                        child: Text('Cancel'),
+                                      ),
+                                      ElevatedButton(
+                                        onPressed: () => Navigator.pop(context, true),
+                                        child: Text('Delete'),
+                                      ),
                                     ],
                                   ),
                                 );
@@ -107,11 +115,9 @@ class _ManageHomePageState extends ConsumerState<ManageHomePage> {
                                 if (confirmed == true) {
                                   final service = ref.read(propertyControllerProvider);
                                   await service.deleteProperty(property.id.toString());
-                                  ref.invalidate(propertyProvider); // Refresh list
-
+                                  ref.invalidate(propertyProvider);
                                 }
                               },
-
                             );
                           },
                         ),
