@@ -31,7 +31,6 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
   @override
   Widget build(BuildContext context) {
     final signUpState = ref.watch(signUpStateProvider);
-    const lightBlue = Color(0xFF64B5F6); // Define light blue color
 
     return Form(
       key: _formKey,
@@ -113,11 +112,6 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
           ),
           const SizedBox(height: 24),
           ElevatedButton(
-            style: ElevatedButton.styleFrom(
-              backgroundColor: lightBlue, // Light blue background
-              foregroundColor: Colors.white, // White text
-              minimumSize: const Size(double.infinity, 50), // Full width button
-            ),
             onPressed:
                 signUpState.isLoading
                     ? null
@@ -139,9 +133,7 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
                     },
             child:
                 signUpState.isLoading
-                    ? const CircularProgressIndicator(
-                      color: Colors.white, // White loading indicator
-                    )
+                    ? const CircularProgressIndicator()
                     : const Text('Sign Up'),
           ),
           if (signUpState.hasError)

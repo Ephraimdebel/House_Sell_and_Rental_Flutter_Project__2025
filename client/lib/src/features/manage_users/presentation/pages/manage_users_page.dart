@@ -5,6 +5,8 @@ import '../provider/user_provider.dart';
 import '../widgets/user_card.dart';
 
 class ManageUsersPage extends ConsumerStatefulWidget {
+  const ManageUsersPage({super.key});
+
   @override
   ConsumerState<ManageUsersPage> createState() => _ManageUsersPageState();
 }
@@ -21,8 +23,8 @@ class _ManageUsersPageState extends ConsumerState<ManageUsersPage> {
       appBar: AppBar(
         backgroundColor: Colors.white,
         automaticallyImplyLeading: true,
-        title: Text('Manage Users')
-        ),
+        title: Text('Manage Users'),
+      ),
       body: Column(
         children: [
           Padding(
@@ -31,17 +33,25 @@ class _ManageUsersPageState extends ConsumerState<ManageUsersPage> {
               decoration: InputDecoration(
                 hintText: 'Search users...',
                 prefixIcon: Icon(Icons.search),
-                border: OutlineInputBorder(borderRadius: BorderRadius.circular(10)),
+                border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(10),
+                ),
               ),
-              onChanged: (val) => setState(() => searchText = val.toLowerCase()),
+              onChanged:
+                  (val) => setState(() => searchText = val.toLowerCase()),
             ),
           ),
           Expanded(
             child: usersAsync.when(
               data: (users) {
-                final filtered = users.where((u) =>
-                    u.fullName.toLowerCase().contains(searchText) ||
-                    u.email.toLowerCase().contains(searchText)).toList();
+                final filtered =
+                    users
+                        .where(
+                          (u) =>
+                              u.fullName.toLowerCase().contains(searchText) ||
+                              u.email.toLowerCase().contains(searchText),
+                        )
+                        .toList();
                 return ListView.builder(
                   itemCount: filtered.length,
                   itemBuilder: (context, index) {

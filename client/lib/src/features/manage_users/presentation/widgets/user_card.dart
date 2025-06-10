@@ -5,7 +5,7 @@ class UserCard extends StatelessWidget {
   final UserEntity user;
   final VoidCallback onDelete;
 
-  const UserCard({required this.user, required this.onDelete});
+  const UserCard({super.key, required this.user, required this.onDelete});
 
   @override
   Widget build(BuildContext context) {
@@ -13,78 +13,77 @@ class UserCard extends StatelessWidget {
       margin: EdgeInsets.symmetric(vertical: 12, horizontal: 24),
       color: Colors.white,
       child: ListTile(
-          contentPadding: EdgeInsets.symmetric(horizontal: 16),
-          leading: CircleAvatar(child: Text(user.fullName[0])),
-          title: Text(
-            user.fullName,
-            style: TextStyle(fontWeight: FontWeight.bold),
-            overflow: TextOverflow.ellipsis,
-          ),
-          subtitle: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(user.email, overflow: TextOverflow.ellipsis, maxLines: 1),
-              SizedBox(height: 4),
-              Row(
-                children: [
-                  Icon(Icons.phone, size: 16, color: Colors.blue),
-                  SizedBox(width: 4),
-                  Expanded(
-                    child: Text(
-                      user.phoneNumber,
-                      overflow: TextOverflow.ellipsis,
-                    ),
-                  ),
-                ],
-              ),
-              SizedBox(height: 4),
-              Container(
-                padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
-                decoration: BoxDecoration(
-                  color: user.role == 'admin'
-                      ? const Color.fromARGB(255, 252, 221, 232)
-                      : const Color.fromARGB(255, 217, 238, 255),
-                  borderRadius: BorderRadius.circular(20),
-                ),
-                child: Text(
-                  user.role == 'admin' ? 'Admin' : 'Guest',
-                  style: TextStyle(
-                    color: user.role == 'admin' ? Colors.pink : Colors.blue,
-                  ),
-                ),
-              ),
-            ],
-          ),
-          trailing: Wrap(
-            spacing: 8,
-            children: [
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4)],
-                ),
-                child: IconButton(
-                  icon: Icon(Icons.person_remove, color: Colors.red),
-                  onPressed: onDelete,
-                ),
-              ),
-              Container(
-                decoration: BoxDecoration(
-                  color: Colors.grey[200],
-                  borderRadius: BorderRadius.circular(20),
-                  boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4)],
-                ),
-                child: IconButton(
-                  icon: Icon(Icons.person, color: Colors.green),
-                  onPressed: () {},
-                ),
-              ),
-            ],
-          ),
-
+        contentPadding: EdgeInsets.symmetric(horizontal: 16),
+        leading: CircleAvatar(child: Text(user.fullName[0])),
+        title: Text(
+          user.fullName,
+          style: TextStyle(fontWeight: FontWeight.bold),
+          overflow: TextOverflow.ellipsis,
         ),
-
+        subtitle: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text(user.email, overflow: TextOverflow.ellipsis, maxLines: 1),
+            SizedBox(height: 4),
+            Row(
+              children: [
+                Icon(Icons.phone, size: 16, color: Colors.blue),
+                SizedBox(width: 4),
+                Expanded(
+                  child: Text(
+                    user.phoneNumber,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                ),
+              ],
+            ),
+            SizedBox(height: 4),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 8, vertical: 2),
+              decoration: BoxDecoration(
+                color:
+                    user.role == 'admin'
+                        ? const Color.fromARGB(255, 252, 221, 232)
+                        : const Color.fromARGB(255, 217, 238, 255),
+                borderRadius: BorderRadius.circular(20),
+              ),
+              child: Text(
+                user.role == 'admin' ? 'Admin' : 'Guest',
+                style: TextStyle(
+                  color: user.role == 'admin' ? Colors.pink : Colors.blue,
+                ),
+              ),
+            ),
+          ],
+        ),
+        trailing: Wrap(
+          spacing: 8,
+          children: [
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4)],
+              ),
+              child: IconButton(
+                icon: Icon(Icons.person_remove, color: Colors.red),
+                onPressed: onDelete,
+              ),
+            ),
+            Container(
+              decoration: BoxDecoration(
+                color: Colors.grey[200],
+                borderRadius: BorderRadius.circular(20),
+                boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 4)],
+              ),
+              child: IconButton(
+                icon: Icon(Icons.person, color: Colors.green),
+                onPressed: () {},
+              ),
+            ),
+          ],
+        ),
+      ),
     );
   }
 }
