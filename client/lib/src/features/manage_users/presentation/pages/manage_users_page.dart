@@ -17,11 +17,15 @@ class _ManageUsersPageState extends ConsumerState<ManageUsersPage> {
     final usersAsync = ref.watch(userListProvider);
 
     return Scaffold(
-      backgroundColor: Colors.grey[200],
+      backgroundColor: Color(0xFFF7F7F7),
       appBar: AppBar(
         backgroundColor: Colors.white,
-        automaticallyImplyLeading: true,
-        title: Text('Manage Users')
+        automaticallyImplyLeading: false,
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back, color: Color(0xFF5D9DF0)),
+          onPressed: () => Navigator.of(context).pop(),
+        ),
+        title: Text('Manage Users',style: TextStyle(color: Color(0xFF5D9DF0)),)
         ),
       body: Column(
         children: [
