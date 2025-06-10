@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:dio/dio.dart';
 import 'package:fpdart/fpdart.dart';
 import '../../../../core/errors/failures.dart';
@@ -25,16 +27,22 @@ class LoginRemoteDataSourceImpl implements LoginRemoteDataSource {
       if (response.statusCode == 200) {
         return Right(response.data);
       } else {
-        return Left(ServerFailure(response.data['message'] ?? 'Login failed'));
+        return Left(
+          ServerFailure(
+            message: 'Login failed',
+            statusCode: response.statusCode,
+          ),
+        );
       }
     } on DioException catch (e) {
       return Left(
         ServerFailure(
-          e.response?.data['message'] ?? e.message ?? 'Login failed',
+          message: 'Login failed',
+          statusCode: e.response?.statusCode,
         ),
       );
     } catch (e) {
-      return Left(ServerFailure('Unexpected error occurred'));
+      return Left(ServerFailure(message: 'Unexpected error occurred'));
     }
   }
 }
