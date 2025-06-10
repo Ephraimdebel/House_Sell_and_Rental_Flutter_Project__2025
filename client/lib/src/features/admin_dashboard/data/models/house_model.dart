@@ -5,11 +5,8 @@ class HouseModel extends HouseEntity {
   HouseModel({
     required super.id,
     required super.typeId,
-    required super.title,
-    required super.city,
-    required super.streetAddress,
+    required super.title,// Make sure 'streetAddress' exists in HouseEntity's constructor, or rename to match the correct parameter name.
     required super.price,
-    required super.isFeatured,
   });
 
   factory HouseModel.fromJson(Map<String, dynamic> json) {
@@ -17,10 +14,7 @@ class HouseModel extends HouseEntity {
       id: json['id'],
       typeId: json['type_id'],
       title: json['title'],
-      city: json['city'],
-      streetAddress: json['streetAddress'],
       price: json['price'],
-      isFeatured: json['isFeatured'] == 1,
     );
   }
 }

@@ -1,14 +1,11 @@
-// usecases.dart
 import 'package:house_rental_flutter/src/features/admin_dashboard/domain/repositories/house_repository.dart';
-
-import '../entities/house_entity.dart';
 
 class GetDashboardStatsUseCase {
   final HouseRepository repository;
 
   GetDashboardStatsUseCase(this.repository);
 
-  Future<Map<String, dynamic>> call() async {
+  Future<Map<String, dynamic>> execute() async {
     final forSale = await repository.getHousesByType(1);
     final forRent = await repository.getHousesByType(2);
 

@@ -1,6 +1,7 @@
 // lib/features/signup/presentation/widgets/signup_form.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+<<<<<<< HEAD
 import '../../presentation/providers/signup_providers.dart';
 
 class SignUpForm extends ConsumerStatefulWidget {
@@ -8,6 +9,15 @@ class SignUpForm extends ConsumerStatefulWidget {
 
   @override
   ConsumerState<SignUpForm> createState() => _SignUpFormState();
+=======
+import 'package:house_rental_flutter/src/features/admin_dashboard/presentation/pages/admin_dashboard_page.dart';
+import 'package:house_rental_flutter/src/features/manage_users/presentation/pages/manage_users_page.dart';
+import 'package:house_rental_flutter/src/features/profile/presentation/pages/profile_page.dart';
+import 'src/features/manage_home/presentation/pages/manage_home_page.dart';
+import 'src/features/add_property/presentation/pages/add_property_page.dart';
+void main() {
+  runApp(const ProviderScope(child: MyApp()));
+>>>>>>> 41180fa37550cc1eb672f395a69487074f62355c
 }
 
 class _SignUpFormState extends ConsumerState<SignUpForm> {
@@ -162,6 +172,10 @@ class _SignUpFormState extends ConsumerState<SignUpForm> {
             ),
         ],
       ),
+<<<<<<< HEAD
+=======
+      home: AdminDashboardPage(),
+>>>>>>> 41180fa37550cc1eb672f395a69487074f62355c
     );
   }
 }
