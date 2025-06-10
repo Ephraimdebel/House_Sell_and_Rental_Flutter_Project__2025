@@ -7,6 +7,10 @@ import '../../features/add_property/presentation/pages/add_property_page.dart';
 import '../../features/edit_property/presentation/pages/edit_property_page.dart';
 import '../../features/manage_home/presentation/pages/manage_home_page.dart';
 import '../../features/admin_dashboard/presentation/pages/admin_dashboard_page.dart';
+import '../../features/home/presentation/pages/home_page.dart';
+import '../../features/signup/presentation/pages/signup_page.dart';
+import '../../features/login/presentation/pages/login_page.dart';
+import '../../features/profile/presentation/pages/profile_page.dart';
 
 import '../../features/edit_property/domain/entities/new_property.dart';
 
@@ -16,6 +20,10 @@ final routerProvider = Provider<GoRouter>((ref) {
     routes: [
       GoRoute(
         path: '/',
+        builder: (context, state) => const ProfileScreen(),
+      ),
+       GoRoute(
+        path: '/admin',
         builder: (context, state) => const AdminDashboardPage(),
       ),
       GoRoute(

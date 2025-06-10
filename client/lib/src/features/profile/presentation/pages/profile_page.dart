@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import '../../../admin_dashboard/presentation/pages/admin_dashboard_page.dart';
+import 'package:go_router/go_router.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -51,7 +53,8 @@ class ProfileScreen extends StatelessWidget {
                   children: [
                     ElevatedButton(
                       onPressed: () {
-                        // Login button action
+                  
+                                context.push('/admin');
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,

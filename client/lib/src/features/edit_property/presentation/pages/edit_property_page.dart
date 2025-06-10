@@ -119,7 +119,6 @@ class _EditPropertyPageState extends ConsumerState<EditPropertyPage> {
       // Handle error
     }
   }
-
   // Helper method for input decoration with white bg & gray border
   InputDecoration _inputDecoration(String label) {
     return InputDecoration(
@@ -159,10 +158,11 @@ class _EditPropertyPageState extends ConsumerState<EditPropertyPage> {
         elevation: 1,
       ),
       body: SingleChildScrollView(
-        padding: const EdgeInsets.all(8),
+        padding: const EdgeInsets.all(16),
         child: Form(
           key: _formKey,
           child: Column(
+           crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               TextFormField(
                 controller: _titleController,
@@ -318,7 +318,7 @@ class _EditPropertyPageState extends ConsumerState<EditPropertyPage> {
                   return FilterChip(
                     label: Text(entry.value),
                     selected: isSelected,
-                    selectedColor: Colors.blue.shade300,
+                    selectedColor: Colors.blue,
                     checkmarkColor: Colors.white,
                     onSelected: (val) {
                       setState(() {
@@ -330,6 +330,9 @@ class _EditPropertyPageState extends ConsumerState<EditPropertyPage> {
                       });
                     },
                     backgroundColor: Colors.grey.shade200,
+                    labelStyle: TextStyle(
+                      color: isSelected ? Colors.white : Colors.black, // correct this line
+                    ),
                   );
                 }).toList(),
               ),
@@ -377,10 +380,19 @@ class _EditPropertyPageState extends ConsumerState<EditPropertyPage> {
                 width: double.infinity,
                 height: 48,
                 child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF5D9DF0),
+                      elevation: 0,
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                    ),
                   onPressed: submit,
-                  child: const Text('Update Property', style: TextStyle(fontSize: 18)),
+                  child: Text(
+                      "Update Property",
+                      style: TextStyle(color: Colors.white),
+                    ),
                 ),
               ),
+              SizedBox(height: 26),
             ],
           ),
         ),

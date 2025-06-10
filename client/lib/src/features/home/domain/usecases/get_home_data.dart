@@ -14,7 +14,7 @@ class GetHomeData implements UseCase<HomeEntity, NoParams> {
     // Get featured houses from API
     final housesResult = await repository.getFeaturedHouses();
 
-    return housesResult.fold((failure) => Left(failure), (houses) {
+    return housesResult.fold((failure) => Left(failure as Failure), (houses) {
       // Combine API data with static UI content from your Figma design
       return Right(
         HomeEntity(

@@ -95,11 +95,36 @@ class _AddPropertyPageState extends ConsumerState<AddPropertyPage> {
       Navigator.pop(context);
     }
   }
-
+    // Helper method for input decoration with white bg & gray border
+  InputDecoration _inputDecoration(String label) {
+    return InputDecoration(
+      labelText: label,
+      filled: true,
+      fillColor: Colors.white,
+      border: OutlineInputBorder(
+        borderSide: const BorderSide(color: Colors.grey),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      enabledBorder: OutlineInputBorder(
+        borderSide: const BorderSide(color: Colors.grey),
+        borderRadius: BorderRadius.circular(4),
+      ),
+      focusedBorder: OutlineInputBorder(
+        borderSide: const BorderSide(color: Colors.blue),
+        borderRadius: BorderRadius.circular(4),
+      ),
+    );
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: const Text('Add Property')),
+      backgroundColor: const Color(0xFFF7F7F7),
+      appBar: AppBar(title: const Text('Add Property', 
+       style: TextStyle(color: Colors.blue),
+    ),
+        backgroundColor: Colors.white,
+        iconTheme: const IconThemeData(color: Colors.blue),
+        ),
       body: SingleChildScrollView(
         padding: const EdgeInsets.all(16),
         child: Form(
@@ -109,16 +134,23 @@ class _AddPropertyPageState extends ConsumerState<AddPropertyPage> {
             children: [
               TextFormField(
                 controller: _titleController,
-                decoration: const InputDecoration(labelText: 'Title'),
-                validator:
-                    (val) => val == null || val.isEmpty ? 'Required' : null,
+                decoration:  _inputDecoration('Title'),
               ),
+              const SizedBox(height: 12),
               TextFormField(
                 controller: _descriptionController,
-                decoration: const InputDecoration(labelText: 'Description'),
+                decoration:  _inputDecoration('Description'),
                 maxLines: 3,
               ),
-              const SizedBox(height: 16),
+               const SizedBox(height: 12),
+                  const SizedBox(height: 20),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'property type',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+              ),
               Wrap(
                 spacing: 8,
                 children:
@@ -127,10 +159,23 @@ class _AddPropertyPageState extends ConsumerState<AddPropertyPage> {
                           (e) => ChoiceChip(
                             label: Text(e),
                             selected: category == e,
+                            selectedColor: Colors.blue,
+                            backgroundColor: Colors.grey.shade200,
                             onSelected: (_) => setState(() => category = e),
+                            labelStyle: TextStyle(
+                            color: category == e ? Colors.white : Colors.black, // correct this line
+                          ),
                           ),
                         )
                         .toList(),
+              ),
+              const SizedBox(height: 20),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'listing type',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
               ),
               const SizedBox(height: 8),
               Wrap(
@@ -141,23 +186,37 @@ class _AddPropertyPageState extends ConsumerState<AddPropertyPage> {
                           (e) => ChoiceChip(
                             label: Text(e),
                             selected: type == e,
+                            selectedColor: Colors.blue,
                             onSelected: (_) => setState(() => type = e),
+                            backgroundColor: Colors.grey.shade200,
+                            labelStyle: TextStyle(
+                            color: type == e ? Colors.white : Colors.black, // correct this line
+                        ),
                           ),
                         )
                         .toList(),
               ),
+              const SizedBox(height: 20),
+              const Align(
+                alignment: Alignment.centerLeft,
+                child: Text(
+                  'Price & Details',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
+              ),
               const SizedBox(height: 16),
               TextFormField(
                 controller: _priceController,
-                decoration: const InputDecoration(labelText: 'Price'),
+                decoration: _inputDecoration('Price'),
                 keyboardType: TextInputType.number,
               ),
+              const SizedBox(height: 12),
               Row(
                 children: [
                   Expanded(
                     child: TextFormField(
                       controller: _bedroomController,
-                      decoration: const InputDecoration(labelText: 'Bedrooms'),
+                      decoration:  _inputDecoration('Bedrooms'),
                       keyboardType: TextInputType.number,
                     ),
                   ),
@@ -165,15 +224,16 @@ class _AddPropertyPageState extends ConsumerState<AddPropertyPage> {
                   Expanded(
                     child: TextFormField(
                       controller: _bathroomController,
-                      decoration: const InputDecoration(labelText: 'Bathrooms'),
+                      decoration: _inputDecoration('Bathrooms'),
                       keyboardType: TextInputType.number,
                     ),
                   ),
                 ],
               ),
+              const SizedBox(height: 12),
               TextFormField(
                 controller: _areaController,
-                decoration: const InputDecoration(labelText: 'Area (sq ft)'),
+                decoration: _inputDecoration('Area'),
                 keyboardType: TextInputType.number,
               ),
               const SizedBox(height: 16),
@@ -183,31 +243,36 @@ class _AddPropertyPageState extends ConsumerState<AddPropertyPage> {
               ),
               TextFormField(
                 controller: _streetController,
-                decoration: const InputDecoration(labelText: 'Street'),
+                decoration:  _inputDecoration('Street'),
               ),
+              const SizedBox(height: 12),
               Row(
                 children: [
                   Expanded(
                     child: TextFormField(
                       controller: _cityController,
-                      decoration: const InputDecoration(labelText: 'City'),
+                      decoration: _inputDecoration('City'),
                     ),
                   ),
                   const SizedBox(width: 8),
                   Expanded(
                     child: TextFormField(
                       controller: _provinceController,
-                      decoration: const InputDecoration(labelText: 'State'),
+                      decoration:  _inputDecoration('State'),
                     ),
                   ),
                 ],
               ),
+              const SizedBox(height: 12),
               TextFormField(
                 controller: _countryController,
-                decoration: const InputDecoration(labelText: 'Country'),
+                decoration:_inputDecoration('Country'),
               ),
               const SizedBox(height: 16),
-              const Text('Amenities'),
+              const Text(
+                  'Amenities',
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16),
+                ),
               Wrap(
                 spacing: 8,
                 children:
@@ -215,9 +280,13 @@ class _AddPropertyPageState extends ConsumerState<AddPropertyPage> {
                         .asMap()
                         .entries
                         .map(
-                          (entry) => FilterChip(
+                          (entry){ 
+                           final isSelected = selectedFacilities.contains(entry.key);
+                            return FilterChip(
                             label: Text(entry.value),
-                            selected: selectedFacilities.contains(entry.key),
+                            selected: isSelected,
+                            selectedColor: Colors.blue,
+                            checkmarkColor: Colors.white,
                             onSelected:
                                 (val) => setState(() {
                                   if (val) {
@@ -226,7 +295,12 @@ class _AddPropertyPageState extends ConsumerState<AddPropertyPage> {
                                     selectedFacilities.remove(entry.key);
                                   }
                                 }),
-                          ),
+                              backgroundColor: Colors.grey.shade200,
+                              labelStyle: TextStyle(
+                              color: isSelected ? Colors.white : Colors.black, // correct this line
+                           ),
+                          );
+                          }
                         )
                         .toList(),
               ),
@@ -251,10 +325,23 @@ class _AddPropertyPageState extends ConsumerState<AddPropertyPage> {
                         )
                         .toList(),
               ),
-              const SizedBox(height: 24),
-              ElevatedButton(
-                onPressed: submit,
-                child: const Text('Submit Property'),
+              const SizedBox(height: 32),
+              SizedBox(
+                width: double.infinity,
+                height: 48,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                      backgroundColor: Color(0xFF5D9DF0),
+                      elevation: 0,
+                      padding: EdgeInsets.symmetric(vertical: 16),
+                    ),
+                  onPressed: submit,
+                 child: Text(
+                      "Add New Property",
+                      style: TextStyle(color: Colors.white),
+                    ),
+                ),
+                
               ),
             ],
           ),
