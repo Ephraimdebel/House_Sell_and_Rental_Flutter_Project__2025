@@ -42,6 +42,7 @@ class FeaturedTile extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Card(
+      color:Colors.white,
       elevation: 2,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.all(Radius.circular(20)),
@@ -53,7 +54,7 @@ class FeaturedTile extends StatelessWidget {
             borderRadius: const BorderRadius.vertical(top: Radius.circular(10)),
             child: Image.network(
               property.listingPhotoPaths.isNotEmpty 
-                  ? property.listingPhotoPaths.first 
+                  ? property.listingPhotoPaths.first.replaceFirst("localhost","10.0.2.2")
                   : 'https://via.placeholder.com/250x150',
               width: double.infinity,
               height: 200,

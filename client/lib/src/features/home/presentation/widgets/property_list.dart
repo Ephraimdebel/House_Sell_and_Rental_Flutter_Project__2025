@@ -70,6 +70,7 @@ class PropertyTile extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       elevation: 2,
+      color:Colors.white,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(10),
       ),
@@ -84,7 +85,7 @@ class PropertyTile extends StatelessWidget {
                 height: 120,
                 child: Image.network(
                   property.listingPhotoPaths.isNotEmpty
-                      ? property.listingPhotoPaths.first
+                      ? property.listingPhotoPaths.first.replaceFirst("localhost","10.0.2.2")
                       : 'https://via.placeholder.com/250x150',
                   fit: BoxFit.cover,
                 ),
