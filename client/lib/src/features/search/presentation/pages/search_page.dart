@@ -54,10 +54,7 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                   itemCount: results.length,
                   itemBuilder: (context, index) {
                     final result = results[index];
-                    final imageUrl = result.photos.first.replaceFirst(
-                      'localhost',
-                      '10.0.2.2',
-                    );
+                    final imageUrl = result.photos.first.replaceFirst('localhost', '10.0.2.2');
 
                     return Card(
                       margin: const EdgeInsets.only(bottom: 16),
@@ -85,6 +82,13 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Text(
+                                  "\$${result.price}",
+                                  style: const TextStyle(
+                                    fontWeight: FontWeight.bold,
+                                    fontSize: 16,
+                                  ),
+                                ),
+                                Text(
                                   result.title,
                                   style: const TextStyle(
                                     fontSize: 16,
@@ -97,33 +101,50 @@ class _SearchPageState extends ConsumerState<SearchPage> {
                                   style: const TextStyle(color: Colors.grey),
                                 ),
                                 const SizedBox(height: 8),
+
                                 Row(
                                   children: [
-                                    const Icon(Icons.bed_outlined, size: 18),
+                                    const Icon(
+                                      Icons.bed_outlined,
+                                      size: 18,
+                                      color: Colors.grey,
+                                    ),
                                     const SizedBox(width: 4),
-                                    Text("${result.bedroomCount} Beds"),
+                                    Text(
+                                      "${result.bedroomCount} Beds",
+                                      style: const TextStyle(
+                                        color: Colors.grey,
+                                      ),
+                                    ),
                                     const SizedBox(width: 16),
                                     const Icon(
                                       Icons.bathtub_outlined,
                                       size: 18,
+                                      color: Colors.grey,
                                     ),
                                     const SizedBox(width: 4),
-                                    Text("${result.bathroomCount} Baths"),
+                                    Text(
+                                      "${result.bathroomCount} Baths",
+                                      style: const TextStyle(
+                                        color: Colors.grey,
+                                      ),
+                                    ),
                                     const SizedBox(width: 16),
-                                    const Icon(Icons.square_foot, size: 18),
+                                    const Icon(
+                                      Icons.square_foot,
+                                      size: 18,
+                                      color: Colors.grey,
+                                    ),
                                     const SizedBox(width: 4),
-                                    Text("${result.area} sqft"),
+                                    Text(
+                                      "${result.area} sqft",
+                                      style: const TextStyle(
+                                        color: Colors.grey,
+                                      ),
+                                    ),
                                   ],
                                 ),
                                 const SizedBox(height: 8),
-                                Text(
-                                  "\$${result.price}",
-                                  style: const TextStyle(
-                                    fontWeight: FontWeight.bold,
-                                    fontSize: 16,
-                                    color: Colors.green,
-                                  ),
-                                ),
                               ],
                             ),
                           ),
