@@ -385,8 +385,8 @@ const getHouseDetails = async (req, res) => {
 
 
 const getFavoriteListings = async (req, res) => {
-  const userId = req.params.userId;
-
+  // const userId = req.params.userId;
+userId = 18
   try {
     const rows = await dbConnection.query(
       `SELECT Listings.* 
@@ -402,7 +402,6 @@ const getFavoriteListings = async (req, res) => {
     res.status(500).json({ message: "Server error while fetching favorites" });
   }
 };
-
 
 const addFavorite = async (req, res) => {
   const { user_id, listing_id } = req.body;

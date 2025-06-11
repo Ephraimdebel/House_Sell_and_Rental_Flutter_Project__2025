@@ -11,6 +11,7 @@ import '../../features/home/presentation/pages/home_page.dart';
 import '../../features/signup/presentation/pages/signup_page.dart';
 import '../../features/login/presentation/pages/login_page.dart';
 import '../../features/profile/presentation/pages/profile_page.dart';
+import '../../features/favourite/presentation/pages/favourite_page.dart';
 
 import '../../features/edit_property/domain/entities/new_property.dart';
 
@@ -20,7 +21,7 @@ final routerProvider = Provider<GoRouter>((ref) {
     routes: [
       GoRoute(
         path: '/',
-        builder: (context, state) => const ProfileScreen(),
+        builder: (context, state) => const HomePage(),
       ),
        GoRoute(
         path: '/admin',
