@@ -1,4 +1,5 @@
 import 'package:dio/dio.dart';
+import 'package:house_rental_flutter/src/features/edit_property/domain/entities/editable_property.dart';
 import '../domain/entities/new_property.dart';
 import '../domain/repositories/edit_property_repository.dart';
 
@@ -28,6 +29,6 @@ class EditPropertyService {
       ],
     });
 
-    await repository.updateProperty(id, formData);
+    await repository.updateProperty(id as int, formData as EditableProperty);
   }
 }

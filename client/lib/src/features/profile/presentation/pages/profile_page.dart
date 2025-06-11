@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:house_rental_flutter/src/features/home/presentation/pages/home_page.dart';
+import 'package:house_rental_flutter/src/features/login/presentation/pages/login_page.dart';
+import 'package:house_rental_flutter/src/features/signup/presentation/pages/signup_page.dart';
 import '../../../admin_dashboard/presentation/pages/admin_dashboard_page.dart';
-import 'package:go_router/go_router.dart';
 
 class ProfileScreen extends StatelessWidget {
   const ProfileScreen({super.key});
@@ -11,13 +13,6 @@ class ProfileScreen extends StatelessWidget {
       backgroundColor: const Color(0xFFF7F7F7),
       appBar: AppBar(
         title: const Text('Profile',style: TextStyle(color: Colors.blue),),
-        leading: IconButton(
-          icon: const Icon(Icons.arrow_back, color: Colors.blue),
-          onPressed: () {
-            Navigator.of(context).pop();
-          },
-          
-        ),
         elevation: 0.5,
         backgroundColor: Colors.white,
       ),
@@ -54,7 +49,11 @@ class ProfileScreen extends StatelessWidget {
                     ElevatedButton(
                       onPressed: () {
                   
-                                context.push('/admin');
+                                Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => const AdminDashboardPage(),
+                                  ),
+                                );
                       },
                       style: ElevatedButton.styleFrom(
                         backgroundColor: Colors.blue,
@@ -67,6 +66,11 @@ class ProfileScreen extends StatelessWidget {
                     OutlinedButton(
                       onPressed: () {
                         // Sign up button action
+                        Navigator.of(context).push(
+                                  MaterialPageRoute(
+                                    builder: (context) => const SignUpPage(),
+                                  ),
+                                );
                       },
                       style: OutlinedButton.styleFrom(
                         padding: const EdgeInsets.symmetric(horizontal: 32, vertical: 12),

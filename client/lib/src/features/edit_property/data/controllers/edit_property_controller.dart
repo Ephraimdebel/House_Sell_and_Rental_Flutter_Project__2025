@@ -1,5 +1,6 @@
 import 'package:dio/dio.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:house_rental_flutter/src/features/edit_property/domain/entities/editable_property.dart';
 import '../../data/models/editable_property.dart';
 import '../../../../core/network/dio_client.dart';
 

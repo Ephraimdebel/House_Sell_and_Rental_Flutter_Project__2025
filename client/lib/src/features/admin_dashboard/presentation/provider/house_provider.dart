@@ -6,7 +6,7 @@ import 'package:house_rental_flutter/src/features/admin_dashboard/data/repositor
 import 'package:house_rental_flutter/src/features/admin_dashboard/domain/repositories/house_repository.dart';
 import 'package:house_rental_flutter/src/features/admin_dashboard/domain/usecases/usecases.dart';
 
-final dioProvider = Provider((ref) => Dio(BaseOptions(baseUrl: "http://10.0.2.2:5500/api/")));
+final dioProvider = Provider((ref) => Dio(BaseOptions(baseUrl: "http://localhost:5500/api")));
 
 final houseRemoteDataSourceProvider = Provider((ref) => HouseRemoteDataSource(ref.read(dioProvider)));
 
