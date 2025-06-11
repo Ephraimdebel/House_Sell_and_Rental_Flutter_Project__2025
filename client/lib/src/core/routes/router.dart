@@ -10,7 +10,7 @@ import 'package:house_rental_flutter/src/features/manage_home/presentation/pages
 import 'package:house_rental_flutter/src/features/profile/presentation/pages/profile_page.dart';
 import 'package:house_rental_flutter/src/features/signup/presentation/pages/signup_page.dart';
 import 'package:house_rental_flutter/src/features/favourite/presentation/pages/favourite_page.dart';
-
+import 'package:house_rental_flutter/src/features/search/presentation/pages/search_page.dart';
 
 final routerProvider = Provider<GoRouter>((ref) {
   return GoRouter(
@@ -28,7 +28,7 @@ final routerProvider = Provider<GoRouter>((ref) {
           ),
           GoRoute(
             path: '/search',
-            builder: (context, state) => const ManageHomePage(), // example for Search
+            builder: (context, state) => const SearchPage(), // example for Search
           ),
           GoRoute(
             path: '/add',
