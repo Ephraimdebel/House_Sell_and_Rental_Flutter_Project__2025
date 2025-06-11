@@ -1,4 +1,3 @@
-// lib/features/login/presentation/widgets/login_form.dart
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../presentation/providers/login_providers.dart';
@@ -15,6 +14,8 @@ class _LoginFormState extends ConsumerState<LoginForm> {
   final _emailController = TextEditingController();
   final _passwordController = TextEditingController();
 
+  bool _isListening = false;
+
   @override
   void dispose() {
     _emailController.dispose();
@@ -25,10 +26,47 @@ class _LoginFormState extends ConsumerState<LoginForm> {
   @override
   Widget build(BuildContext context) {
     final loginState = ref.watch(loginStateProvider);
-    // Define the light blue color
-    const lightBlue = Color(
-      0xFF64B5F6,
-    ); // You can adjust this color code as needed
+
+  // One-time listener to handle navigation and error
+
+@override
+void initState() {
+  super.initState();
+
+  ref.listen<AsyncValue<Map<String, dynamic>?>>(loginStateProvider, (prev, next) {
+    next.when(
+      data: (data) {
+        if (data != null) {
+          WidgetsBinding.instance.addPostFrameCallback((_) {
+            ScaffoldMessenger.of(context).showSnackBar(
+              const SnackBar(content: Text('Login successful!')),
+            );
+
+            Future.delayed(const Duration(milliseconds: 100), () {
+              Navigator.pushReplacementNamed(context, '/profile');
+            });
+          });
+        }
+      },
+      loading: () {},
+      error: (err, _) {
+        ScaffoldMessenger.of(context).showSnackBar(
+          SnackBar(content: Text('Login failed: $err')),
+        );
+      },
+    );
+  });
+}
+
+@override
+void dispose() {
+  _emailController.dispose();
+  _passwordController.dispose();
+  super.dispose();
+}
+
+
+    const lightBlue = Color(0xFF64B5F6);
 
     return Form(
       key: _formKey,
@@ -44,6 +82,8 @@ class _LoginFormState extends ConsumerState<LoginForm> {
             style: TextStyle(color: Colors.grey),
           ),
           const SizedBox(height: 32),
+
+          // Email input
           TextFormField(
             controller: _emailController,
             decoration: const InputDecoration(
@@ -55,15 +95,15 @@ class _LoginFormState extends ConsumerState<LoginForm> {
               if (value == null || value.isEmpty) {
                 return 'Please enter your email';
               }
-              if (!RegExp(
-                r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$',
-              ).hasMatch(value)) {
+              if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
                 return 'Please enter a valid email';
               }
               return null;
             },
           ),
           const SizedBox(height: 16),
+
+          // Password input
           TextFormField(
             controller: _passwordController,
             obscureText: true,
@@ -83,11 +123,12 @@ class _LoginFormState extends ConsumerState<LoginForm> {
             },
           ),
           const SizedBox(height: 8),
+
           Align(
             alignment: Alignment.centerRight,
             child: TextButton(
               onPressed: () {
-                // Navigate to forgot password screen
+                // Navigate to forgot password
               },
               child: const Text(
                 'Forgot Password?',
@@ -96,60 +137,49 @@ class _LoginFormState extends ConsumerState<LoginForm> {
             ),
           ),
           const SizedBox(height: 24),
+
+          // Submit button
           ElevatedButton(
             style: ElevatedButton.styleFrom(
-              backgroundColor: lightBlue, // Background color
-              foregroundColor: Colors.white, // Text color
-              minimumSize: const Size(double.infinity, 50), // Full width
+              backgroundColor: lightBlue,
+              foregroundColor: Colors.white,
+              minimumSize: const Size(double.infinity, 50),
             ),
-            onPressed:
-                loginState.isLoading
-                    ? null
-                    : () {
-                      if (_formKey.currentState!.validate()) {
-                        ref
-                            .read(loginStateProvider.notifier)
-                            .login(
-                              email: _emailController.text,
-                              password: _passwordController.text,
-                            );
-                      }
-                    },
-            child:
-                loginState.isLoading
-                    ? const CircularProgressIndicator(
-                      color: Colors.white, // White loading indicator
-                    )
-                    : const Text('Sign In'),
+            onPressed: loginState.isLoading
+                ? null
+                : () {
+                    if (_formKey.currentState!.validate()) {
+                      ref.read(loginStateProvider.notifier).login(
+                            email: _emailController.text,
+                            password: _passwordController.text,
+                          );
+                    }
+                  },
+            child: loginState.isLoading
+                ? const CircularProgressIndicator(color: Colors.white)
+                : const Text('Sign In'),
           ),
           const SizedBox(height: 16),
+
+          // Sign up text
           TextButton(
             onPressed: () {
-              // Navigate to sign up screen
+              // Navigate to sign up
             },
             child: const Text.rich(
               TextSpan(
                 text: "Don't have an account? ",
-                style: TextStyle(
-                  color: Color.fromARGB(
-                    255,
-                    8,
-                    8,
-                    8,
-                  ), // Grey color for the text
-                ),
+                style: TextStyle(color: Colors.black87),
                 children: [
                   TextSpan(
                     text: 'Sign Up',
-                    style: TextStyle(
-                      fontWeight: FontWeight.bold,
-                      color: lightBlue, // Light blue color for Sign Up
-                    ),
+                    style: TextStyle(fontWeight: FontWeight.bold, color: lightBlue),
                   ),
                 ],
               ),
             ),
           ),
+
           if (loginState.hasError)
             Padding(
               padding: const EdgeInsets.only(top: 16),
@@ -162,4 +192,4 @@ class _LoginFormState extends ConsumerState<LoginForm> {
       ),
     );
   }
-}
+}  
