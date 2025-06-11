@@ -1,17 +1,15 @@
 abstract class Failure {
   final String message;
+  final int? statusCode;
 
-  Failure(this.message);
+  const Failure(this.message, [this.statusCode]);
 }
 
 class ServerFailure extends Failure {
-  ServerFailure(super.message);
-}
+  // New constructor with named parameters
+  const ServerFailure({required String message, int? statusCode})
+    : super(message, statusCode);
 
-class NetworkFailure extends Failure {
-  NetworkFailure(super.message);
-}
-
-class CacheFailure extends Failure {
-  CacheFailure(super.message);
+  // Legacy constructor for backward compatibility
+  const ServerFailure.legacy(String message) : super(message);
 }

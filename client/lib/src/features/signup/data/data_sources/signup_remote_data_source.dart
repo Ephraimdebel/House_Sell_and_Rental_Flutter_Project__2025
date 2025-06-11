@@ -23,16 +23,22 @@ class SignUpRemoteDataSourceImpl implements SignUpRemoteDataSource {
       if (response.statusCode == 200 || response.statusCode == 201) {
         return Right(response.data['message']);
       } else {
-        return Left(ServerFailure(response.data['message'] ?? 'Signup failed'));
+        return Left(
+          ServerFailure(
+            message: 'Signup failed',
+            statusCode: response.statusCode,
+          ),
+        );
       }
     } on DioException catch (e) {
       return Left(
         ServerFailure(
-          e.response?.data['message'] ?? e.message ?? 'Signup failed',
+          message: 'Signup failed',
+          statusCode: e.response?.statusCode,
         ),
       );
     } catch (e) {
-      return Left(ServerFailure('Unexpected error occurred'));
+      return Left(ServerFailure(message: 'Unexpected error occurred'));
     }
   }
 }

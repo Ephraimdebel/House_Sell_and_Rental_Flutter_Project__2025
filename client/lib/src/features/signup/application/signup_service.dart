@@ -18,7 +18,7 @@ class SignUpService {
     String? phoneNumber,
   }) async {
     if (password != confirmPassword) {
-      return Left(ServerFailure('Passwords do not match'));
+      return Left(ServerFailure(message: 'Passwords do not match'));
     }
 
     final signUpEntity = SignUpEntity(
