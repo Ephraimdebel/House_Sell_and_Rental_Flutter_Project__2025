@@ -46,3 +46,4 @@ class LoginNotifier extends StateNotifier<AsyncValue<Map<String, dynamic>?>> {
     );
   }
 }
+
