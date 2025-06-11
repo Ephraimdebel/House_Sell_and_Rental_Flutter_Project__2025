@@ -75,6 +75,13 @@ class FavouritePage extends ConsumerWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
+                            "\$${favourite.price}",
+                            style: const TextStyle(
+                              fontWeight: FontWeight.bold,
+                              fontSize: 16,
+                            ),
+                          ),
+                          Text(
                             favourite.title,
                             style: const TextStyle(
                               fontSize: 16,
@@ -89,27 +96,33 @@ class FavouritePage extends ConsumerWidget {
                           const SizedBox(height: 8),
                           Row(
                             children: [
-                              Icon(Icons.bed_outlined, size: 18),
+                              Icon(Icons.bed_outlined, size: 18, color: Colors.grey),
                               const SizedBox(width: 4),
-                              Text("${favourite.bedroomCount} Beds"),
+                              Text("${favourite.bedroomCount} Beds",style: const TextStyle(color: Colors.grey),),
+
                               const SizedBox(width: 16),
-                              Icon(Icons.bathtub_outlined, size: 18),
+                              Icon(
+                                Icons.bathtub_outlined,
+                                size: 18,
+                                color: Colors.grey,
+                              ),
                               const SizedBox(width: 4),
-                              Text("${favourite.bathroomCount} Baths"),
+                              Text(
+                                "${favourite.bathroomCount} Baths",
+                                style: const TextStyle(color: Colors.grey),
+                              ),
                               const SizedBox(width: 16),
-                              Icon(Icons.square_foot, size: 18),
+                              Icon(
+                                Icons.square_foot,
+                                size: 18,
+                                color: Colors.grey,
+                              ),
                               const SizedBox(width: 4),
-                              Text("${favourite.area} sqft"),
+                              Text(
+                                "${favourite.area} sqft",
+                                style: const TextStyle(color: Colors.grey),
+                              ),
                             ],
-                          ),
-                          const SizedBox(height: 8),
-                          Text(
-                            "\$${favourite.price}",
-                            style: const TextStyle(
-                              fontWeight: FontWeight.bold,
-                              fontSize: 16,
-                              color: Colors.green,
-                            ),
                           ),
                         ],
                       ),
