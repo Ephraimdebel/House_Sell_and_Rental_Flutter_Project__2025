@@ -6,6 +6,8 @@ import '../../domain/repositories/home_repository.dart';
 import '../../domain/entities/home_entitiy.dart';
 import '../../../../core/usecase/usecase.dart';
 import 'package:dartz/dartz.dart';
+import '../../../../core/errors/failures.dart';
+import '../../../../core/network/dio_client.dart';
 import '../../../../core/network/dio_provider.dart';
 
 final homeRemoteDataSourceProvider = Provider<HomeRemoteDataSource>((ref) {
@@ -38,7 +40,7 @@ class HomeController extends StateNotifier<AsyncValue<HomeEntity>> {
     state = const AsyncValue.loading();
     final result = await getHomeData.call(NoParams());
     state = result.fold(
-      (failure) => AsyncValue.error(failure, StackTrace.current),
+      (failure) => AsyncValue.error(failure ?? 'Unknown failure', StackTrace.current),
       (data) => AsyncValue.data(data),
     );
   }
