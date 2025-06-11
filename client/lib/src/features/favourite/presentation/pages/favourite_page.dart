@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import '../controllers/favourite_controller.dart';
+import '../controllers/favorite_provider.dart';
 import '../../domain/entities/favourite.dart';
 
 class FavouritePage extends ConsumerWidget {
