@@ -1,7 +1,7 @@
-import '../entities/home_entitiy.dart';
-import '../../../../core/errors/failures.dart';
-import 'package:dartz/dartz.dart';
 
-abstract class HomeRepository {
-  Future<Either<Failure, List<HouseEntity>>> getFeaturedHouses();
+import 'package:house_rental_flutter/src/features/home/domain/entities/home_entitiy.dart';
+
+abstract class PropertyRepository {
+  Future<List<Property>> getProperties();
+  Future<List<Property>> getFeaturedProperties();
 }
